@@ -3,11 +3,15 @@ import { useGetContactsQuery } from 'redux/contacts/contactsAPI';
 import { FaRegSadCry } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import ContactsListItem from '../ContactsListItem/ContactsListItem';
+import { useEffect } from 'react';
 
 export default function ContactList() {
-  const { data: contacts, isFetching } = useGetContactsQuery();
+  const { data: contacts, isFetching, refetch } = useGetContactsQuery();
+  console.log('contacts: ', contacts);
   const filter = useSelector(state => state.filter);
-
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
   const getFilteredContacts = () => {
     if (contacts !== undefined) {
       return contacts.filter(contact => {
