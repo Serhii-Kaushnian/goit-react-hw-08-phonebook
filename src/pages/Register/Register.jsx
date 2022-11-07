@@ -4,7 +4,7 @@ export default function Register() {
   return (
     <div>
       <CustomLink to="/signup">Sign Up</CustomLink>
-      <CustomLink to="/Login">Login</CustomLink>
+      <CustomLink to="/login">Login</CustomLink>
     </div>
   );
 }

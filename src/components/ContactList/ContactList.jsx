@@ -6,11 +6,7 @@ import ContactsListItem from '../ContactsListItem/ContactsListItem';
 
 export default function ContactList() {
   const { data: contacts, isFetching } = useGetContactsQuery();
-  console.log('contacts: ', contacts);
-
   const filter = useSelector(state => state.filter);
-  const user = useSelector(state => state.auth.user);
-  console.log('user: ', user);
 
   const getFilteredContacts = () => {
     if (contacts !== undefined) {

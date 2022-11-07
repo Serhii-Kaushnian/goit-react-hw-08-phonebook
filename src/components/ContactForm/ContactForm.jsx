@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { SpinnerCircularFixed } from 'spinners-react';
@@ -22,20 +22,22 @@ export default function ContactForm() {
   const { data: contacts } = useGetContactsQuery();
 
   //=====================================
+  // useEffect(() => {
+  //   refetch();
+  // }, [refetch]);
 
   const isContactlreadyExist = ({ name }) => {
-    let result;
-    if (contacts !== undefined) {
-      result = contact => contact.name.toLowerCase() === name.toLowerCase();
-    }
-    return !result;
+    return contacts.find(
+      contact => contact.name === name && contact.number === number
+    );
   };
 
   const contactFormHadler = data => {
     if (isContactlreadyExist(data)) {
-      addContact(data);
-    } else {
       Notify.info(`Contact ${data.name} is already in Your Phonebook`);
+    } else {
+      console.log('data: ', data);
+      addContact(data);
     }
   };
   //=====================================
