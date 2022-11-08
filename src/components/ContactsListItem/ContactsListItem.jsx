@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useDeleteContactMutation } from 'redux/contacts/contactsAPI';
 import {
   Button,
@@ -9,6 +10,7 @@ import {
 import { SpinnerCircularFixed } from 'spinners-react';
 
 export default function ContactsListItem({ contact }) {
+  console.log('contact: ', contact);
   const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
 
   const deleteContacts = id => {
@@ -20,7 +22,7 @@ export default function ContactsListItem({ contact }) {
         <Item>
           <ItemContainer>
             {contact.name} :
-            <ItemContainerSpan>{contact.phone}</ItemContainerSpan>
+            <ItemContainerSpan>{contact.number}</ItemContainerSpan>
             <Button
               disabled={isDeleting}
               id={contact.id}
@@ -38,3 +40,9 @@ export default function ContactsListItem({ contact }) {
     </>
   );
 }
+ContactsListItem.propTypes = {
+  contact: PropTypes.shape({
+    number: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
+};

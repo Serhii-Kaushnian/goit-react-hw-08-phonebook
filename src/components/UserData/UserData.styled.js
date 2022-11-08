@@ -8,7 +8,7 @@ export const Status = styled.div`
   min-width: 15px;
   min-height: 15px;
   border-radius: 50%;
-  background-color: red;
+  background-color: yellowgreen;
   &:not(:last-child) {
     margin-right: 10px;
   }

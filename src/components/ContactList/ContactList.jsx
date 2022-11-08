@@ -7,7 +7,6 @@ import { useEffect } from 'react';
 
 export default function ContactList() {
   const { data: contacts, isFetching, refetch } = useGetContactsQuery();
-  console.log('contacts: ', contacts);
   const filter = useSelector(state => state.filter);
   useEffect(() => {
     refetch();

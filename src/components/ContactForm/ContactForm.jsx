@@ -22,9 +22,6 @@ export default function ContactForm() {
   const { data: contacts } = useGetContactsQuery();
 
   //=====================================
-  // useEffect(() => {
-  //   refetch();
-  // }, [refetch]);
 
   const isContactlreadyExist = ({ name }) => {
     return contacts.find(
@@ -36,7 +33,6 @@ export default function ContactForm() {
     if (isContactlreadyExist(data)) {
       Notify.info(`Contact ${data.name} is already in Your Phonebook`);
     } else {
-      console.log('data: ', data);
       addContact(data);
     }
   };
