@@ -25,7 +25,7 @@ export default function ContactForm() {
 
   const isContactlreadyExist = ({ name }) => {
     return contacts.find(
-      contact => contact.name === name && contact.number === number
+      contact => contact.name.toLowerCase() === name.toLowerCase()
     );
   };
 

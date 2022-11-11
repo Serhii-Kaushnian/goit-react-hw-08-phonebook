@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Button, Input, Label, Wrapper, Form } from './SignUp.styled';
 import { useDispatch } from 'react-redux';
 import authOperations from 'redux/auth/authOperations';
@@ -20,12 +21,22 @@ export default function SignUp() {
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    dispatch(authOperations.register({ name, email, password }));
-    setName('');
-    setEmail('');
-    setPassword('');
+    const response = await dispatch(
+      authOperations.register({ name, email, password })
+    );
+
+    if (
+      response.payload.message === undefined &&
+      response.payload.status === 400
+    ) {
+      Notify.failure(
+        'It seems that you have already registered with this e-Mail'
+      );
+    } else if (response.payload.message) {
+      Notify.failure('Password must be at least of 7 signs');
+    }
   };
 
   return (

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Wrapper, Form, Label, Title, Input, Button } from './Login.styled';
 import authOperations from 'redux/auth/authOperations';
 
@@ -19,11 +20,12 @@ export default function Login() {
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    dispatch(authOperations.logIn({ email, password }));
-    setEmail('');
-    setPassword('');
+    const response = await dispatch(authOperations.logIn({ email, password }));
+    if (response.payload.status === 400) {
+      Notify.failure('User with this Email or Password not found');
+    }
   };
 
   return (
