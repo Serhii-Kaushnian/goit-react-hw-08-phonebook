@@ -34,6 +34,7 @@ export default function ContactForm() {
       Notify.info(`Contact ${data.name} is already in Your Phonebook`);
     } else {
       addContact(data);
+      formReset();
     }
   };
   //=====================================
@@ -54,7 +55,6 @@ export default function ContactForm() {
     e.preventDefault();
 
     contactFormHadler({ name, number });
-    formReset();
   };
   const formReset = () => {
     setName('');
